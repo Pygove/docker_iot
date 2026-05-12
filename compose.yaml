@@ -45,6 +45,6 @@ services:
       - 8883:8883
     restart: unless-stopped
     volumes:
-      - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+#      - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
       - ./mosquitto/config:/mosquitto/config
 
