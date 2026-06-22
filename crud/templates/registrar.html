@@ -1,9 +1,20 @@
-{% extends "layout.html" %}
-{% block body %}
-    <form method="POST" action="{{url_for('registrar')}}">
-        <input autofocus name="usuario" placeholder="Usuario" type="text">
-        <input name="password" placeholder="Contraseña" type="password">
-        <button type="submit">Aceptar</button>
-    </form>
-
+{% extends "layout.html" %} {% block body %}
+<div class="form-container">
+  <p class="title">Editar contacto</p>
+  <form class="form" action="{{url_for('actualizar_contacto',id=contacto.0)}}" method="POST">
+    <div class="input-group">
+      <label for="nombre">Nombre completo</label>
+      <input type="text" name="nombre" id="nombre" value="{{contacto.1}}" />
+    </div>
+    <div class="input-group">
+      <label for="tel">Teléfono</label>
+      <input type="text" name="tel" id="tel" value="{{contacto.2}}" />
+    </div>
+    <div class="input-group">
+      <label for="email">Email</label>
+      <input type="text" name="email" id="email" value="{{contacto.3}}" />
+    </div>
+    <button class="sign" type="submit">Actualizar</button>
+  </form>
+</div>
 {% endblock %}

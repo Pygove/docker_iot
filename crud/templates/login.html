@@ -1,11 +1,21 @@
-
 {% extends "layout.html" %}
 {% block body %}
-    <form method="POST" action="{{url_for('login')}}">
-        <input autofocus name="usuario" placeholder="Usuario" type="text">
-        <input name="password" placeholder="Contraseña" type="password">
-        <button type="submit">Aceptar</button>
-        <a href="{{url_for('registrar')}}" style="float: right;">Registrarse</a>
-    </form>
- 
+<div class="form-container">
+  <p class="title">Iniciar sesión</p>
+  <form class="form" method="POST" action="{{url_for('login')}}">
+    <div class="input-group">
+      <label for="usuario">Usuario</label>
+      <input autofocus name="usuario" id="usuario" placeholder="veron123" type="text">
+    </div>
+    <div class="input-group">
+      <label for="password">Contraseña</label>
+      <input name="password" id="password" placeholder="loquevosquieras" type="password">
+    </div>
+    <button class="sign" type="submit">Aceptar</button>
+  </form>
+  <p class="signup">
+    No tenés cuenta?
+    <a href="{{url_for('registrar')}}">Registrarse</a>
+  </p>
+</div>
 {% endblock %}
