@@ -5,16 +5,16 @@
   <form class="form" method="POST" action="{{url_for('login')}}">
     <div class="input-group">
       <label for="usuario">Usuario</label>
-      <input autofocus name="usuario" id="usuario" placeholder="veron123" type="text">
+      <input autofocus name="usuario" id="usuario" placeholder="veron123" type="text" required>
     </div>
     <div class="input-group">
       <label for="password">Contraseña</label>
-      <input name="password" id="password" placeholder="loquevosquieras" type="password">
+      <input name="password" id="password" placeholder="loquevosquieras" type="password" required>
     </div>
     <button class="sign" type="submit">Aceptar</button>
   </form>
   <p class="signup">
-    No tenés cuenta?
+    No tenes cuenta?
     <a href="{{url_for('registrar')}}">Registrarse</a>
   </p>
 </div>
