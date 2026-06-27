@@ -6,7 +6,7 @@
   <form class="form" action="{{ url_for('agregar_nodo') }}" method="POST">
     <div class="input-group">
       <label for="nombre">Nombre del nodo</label>
-      <input type="text" name="nombre" id="nombre" placeholder="Pico Living" required>
+      <input type="text" name="nombre" id="nombre" placeholder="Pico parcela 24" required>
     </div>
     <div class="input-group">
       <label for="topico">Tópico (ID del dispositivo)</label>
@@ -59,7 +59,6 @@
 
   <div class="separador"></div>
 
-  <!-- Formulario de DESTELLO -->
   <form class="form" action="{{ url_for('enviar_destello') }}" method="POST">
     <div class="input-group">
       <label for="nodo-d">Nodo de destino</label>
