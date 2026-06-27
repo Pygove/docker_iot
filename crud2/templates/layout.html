@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FLASK CRUD 1.5</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <script>
+      (function () {
+        const tema = localStorage.getItem("tema") || "light";
+        document.documentElement.setAttribute("data-theme", tema);
+      })();
+    </script>
+  </head>
+  <body>
+    {% if g.usuario %}
+    <nav class="navbar">
+      <span class="usuario">{{ g.usuario }}</span>
+      <label class="switch">
+        <input type="checkbox" id="theme-toggle" />
+        <span class="slider"></span>
+      </label>
+      <a href="{{ url_for('logout') }}">Salir</a>
+    </nav>
+    {% endif %}
+
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+
+    <div class="content">
+      {% block body %} {% endblock %}
+    </div>
+
+    <footer class="footer">
+      Este trabajo es auspiciado por
+      <a href="https://solutiodev.com/" target="_blank" rel="noopener">Solutio Dev</a>
+    </footer>
+
+    <script>
+      (function () {
+        const toggle = document.getElementById("theme-toggle");
+        if (!toggle) return;
+
+        const temaActual =
+          document.documentElement.getAttribute("data-theme") || "light";
+        toggle.checked = temaActual === "dark";
+
+        toggle.addEventListener("change", function () {
+          const nuevoTema = toggle.checked ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", nuevoTema);
+          localStorage.setItem("tema", nuevoTema);
+        });
+      })();
+    </script>
+  </body>
+</html>

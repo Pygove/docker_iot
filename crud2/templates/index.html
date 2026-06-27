@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="form-container">
+  <p class="title">Agregar nodo</p>
+  <form class="form" action="{{ url_for('agregar_nodo') }}" method="POST">
+    <div class="input-group">
+      <label for="nombre">Nombre del nodo</label>
+      <input type="text" name="nombre" id="nombre" placeholder="Pico Living" required>
+    </div>
+    <div class="input-group">
+      <label for="topico">Tópico (ID del dispositivo)</label>
+      <input type="text" name="topico" id="topico" placeholder="e6614c311b912b31" required>
+    </div>
+    <button class="sign" type="submit">Agregar nodo</button>
+  </form>
+</div>
+
+<div class="separador"></div>
+
+<div class="form-container">
+  <p class="title">Nodos disponibles</p>
+  {% if nodos %}
+  <ul class="node-list">
+    {% for nodo in nodos %}
+    <li>
+      <span>{{ nodo.1 }} <small>({{ nodo.2 }})</small></span>
+      <a class="del" href="{{ url_for('borrar_nodo', id=nodo.0) }}"
+         onclick="return confirm('¿Desea borrar el nodo {{ nodo.1 }}?')">borrar</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p style="text-align:center; color: var(--muted);">No hay nodos disponibles. Por favor, agregue uno.</p>
+  {% endif %}
+</div>
+
+<div class="separador"></div>
+
+<div class="form-container">
+  <p class="title">Control de nodos</p>
+
+  {% if nodos %}
+  <form class="form" action="{{ url_for('enviar_setpoint') }}" method="POST">
+    <div class="input-group">
+      <label for="nodo-sp">Nodo de destino</label>
+      <select name="nodo" id="nodo-sp" required>
+        {% for nodo in nodos %}
+        <option value="{{ nodo.2 }}">{{ nodo.1 }} ({{ nodo.2 }})</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="input-group">
+      <label for="setpoint">Setpoint (°C)</label>
+      <input type="number" step="0.1" name="setpoint" id="setpoint" placeholder="25.0" required>
+    </div>
+    <button class="sign" type="submit">Enviar setpoint</button>
+  </form>
+
+  <div class="separador"></div>
+
+  <!-- Formulario de DESTELLO -->
+  <form class="form" action="{{ url_for('enviar_destello') }}" method="POST">
+    <div class="input-group">
+      <label for="nodo-d">Nodo de destino</label>
+      <select name="nodo" id="nodo-d" required>
+        {% for nodo in nodos %}
+        <option value="{{ nodo.2 }}">{{ nodo.1 }} ({{ nodo.2 }})</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="sign" type="submit">Enviar destello</button>
+  </form>
+  {% else %}
+  <p style="text-align:center; color: var(--muted);">
+    No hay nodos cargados todavía. Agregá uno arriba.
+  </p>
+  {% endif %}
+</div>
+
+{% endblock %}
